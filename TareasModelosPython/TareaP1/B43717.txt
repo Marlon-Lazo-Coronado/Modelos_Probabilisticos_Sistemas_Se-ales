@@ -1,0 +1,140 @@
+#Modelos Probabilisticos
+# Marlon Lazo Coronado B43717 grupo 1.
+# Tarea 1
+
+#Tarea1
+
+#Tarea 1
+
+import csv
+
+
+def main():
+
+    #Creo unas listas para manejar mas facil la informacion
+    A=[]
+    B=[]
+    C=[]
+    D=[]
+    i=0
+    j=0
+    k=0
+    p=0
+    s=0
+
+    #Profesor, la seccion que tiene #$ no se que es ni como se usa, intente utilizar pandas pero 
+    #el entorno dice que no lo encuentra, por eso uso este pedazo de codigo 
+    # y paso todas las filas A,B,C,D a unas listas donde ya podre utilizar los datos.
+
+    m1 = open("lote.csv", "r")   #$ 
+    lote = csv.reader(m1)        #$
+    for n,a,b,c,d in lote:     
+    #print("El dato", n, a, b, c, d) #Probamos lo que se ha hecho
+
+        A.append(a)
+        B.append(b)
+        C.append(c)
+        D.append(d)
+    
+    #Elimino las letras para quedarme solo con los numeros.
+    del(A[0])
+    del(B[0])
+    del(C[0])
+    del(D[0])
+    
+    #COMENZAMOS A HACER LOS CALCULOS..........................................
+        
+    for m in A:
+        i =i + int(m)      #Calculamos la magnitud de A
+    #print(i) 
+    
+    for m in B:
+        j =j + int(m)      #Calculamos la magnitud de B
+    #print(j) 
+
+    for m in C:
+        k =k + int(m)      #Calculamos la magnitud de C
+    #print(k) 
+
+    for m in D:
+        p =p + int(m)      #Calculamos la magnitud de D
+    #print(p) 
+
+    s = i + j + k + p      #Calculamos la magnitud de S (El conjunto universal!)
+
+    print("La probabilidad de A es", i/s)
+    print("La probabilidad de B es", j/s)
+    print("La probabilidad de C es", k/s)
+    print("La probabilidad de D es", p/s)
+
+    print("La probabilidad total es P(s)= ", (i/s)+(j/s)+(k/s)+(p/s))
+    
+    i = i/s
+    j = j/s
+    k = k/s
+    p = p/s
+
+    
+    #Pregunta 2 combinaciones
+
+    print("Pregunta 2")
+
+    #Verificamos la interseccion
+    InterAB = 0
+    InterAC = 0
+    InterAD = 0
+    InterBC = 0
+    InterCD = 0
+    InterDB = 0
+   
+    for w in range(1, 501):
+        if A==B:
+            InterAB = InterAB +1
+        if A==C:
+            InterAC = InterAB +1
+        if A==D:
+            InterAD = InterAD +1
+        if B==C:
+            InterBC = InterBC +1
+        if B==D:
+            InterDB = InterDB +1
+        if C==D:
+            InterCD = InterAB +1
+       
+    print(InterAB)
+
+    #De aqui se concluye que la probabilidad de la interseccion es 0 ya que no comparten eventos.
+
+    
+
+    print("P(A|B)= ", InterAB/j )
+    print("P(A|C)= ", InterAC/k )
+    print("P(A|D)= ", InterAD/p )
+    print("P(B|A)= ", InterAB/i )
+    print("P(B|C)= ", InterBC/k )
+    print("P(B|D)= ", InterDB/p )
+    print("P(C|A)= ", InterAC/i )
+    print("P(C|B)= ", InterBC/j )
+    print("P(C|D)= ", InterCD/p )
+    print("P(D|A)= ", InterAD/i )
+    print("P(D|B)= ", InterDB/j )
+    print("P(D|C)= ", InterCD/k )
+
+
+    #Pregunta 3
+
+    print("Pregunta 3 eventos independientes")
+
+    print("Para enventos independientes P(A|B)=P(B|A)=0, esto es lo que ocurre al evaluar las combinaciones anteriores, por lo que se puede concluir que todos los conjuntos son independientes.")
+
+
+    #Pregunta 3
+
+    print("Pregunta 4")
+
+    AD = InterAD/(int(len(A)) + int(len(D)))
+
+    print("La probabilida de P(D interseccion A) es:", AD)
+    
+    m1.close()
+main()
